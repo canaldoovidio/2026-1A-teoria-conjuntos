@@ -629,94 +629,171 @@
         .venn-diagram {
             position: relative;
             width: 100%;
-            height: 250px;
-            margin: 20px 0;
+            height: 160px;
+            margin: 10px 0;
+        }
+
+        .venn-diagram.venn-compact {
+            height: 120px;
         }
 
         .venn-container {
             position: relative;
-            width: 400px;
-            height: 250px;
+            width: 320px;
+            height: 160px;
             margin: 0 auto;
+        }
+
+        .venn-compact .venn-container {
+            width: 260px;
+            height: 120px;
         }
 
         .venn-circle {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            opacity: 0.6;
-            border: 2px solid;
+            opacity: 0.5;
+            border: 3px solid;
+            transition: all 0.3s ease;
+        }
+
+        .venn-compact .venn-circle {
+            width: 110px;
+            height: 110px;
         }
 
         .venn-a {
-            background: var(--inteli-coral);
-            left: 50px;
-            top: 25px;
+            background: rgba(255, 69, 69, 0.35);
+            left: 30px;
+            top: 5px;
             border-color: var(--inteli-coral);
         }
 
         .venn-b {
-            background: var(--inteli-lilac);
-            left: 150px;
-            top: 25px;
+            background: rgba(144, 165, 229, 0.35);
+            left: 140px;
+            top: 5px;
             border-color: var(--inteli-lilac);
         }
+
+        .venn-compact .venn-a { left: 20px; top: 5px; }
+        .venn-compact .venn-b { left: 130px; top: 5px; }
 
         .venn-label {
             position: absolute;
             font-weight: 700;
             color: var(--inteli-purple);
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .venn-label-a {
-            top: 50px;
-            left: 70px;
+            top: 40px;
+            left: 55px;
         }
 
         .venn-label-b {
-            top: 50px;
-            right: 60px;
+            top: 40px;
+            right: 35px;
         }
 
         .venn-label-intersection {
-            top: 110px;
-            left: 160px;
+            top: 80px;
+            left: 130px;
+        }
+
+        /* Venn highlighting for different JOIN types */
+        .venn-highlight-intersection .venn-a,
+        .venn-highlight-intersection .venn-b {
+            opacity: 0.25;
+        }
+        .venn-highlight-intersection::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            background: rgba(137, 206, 165, 0.7);
+            border-radius: 50%;
+            top: 20px;
+            left: 120px;
+            z-index: 2;
+        }
+
+        .venn-highlight-left .venn-a {
+            opacity: 0.7;
+            background: rgba(255, 69, 69, 0.6);
+            box-shadow: 0 0 20px rgba(255, 69, 69, 0.3);
+        }
+        .venn-highlight-left .venn-b {
+            opacity: 0.2;
+        }
+
+        .venn-highlight-union .venn-a,
+        .venn-highlight-union .venn-b {
+            opacity: 0.7;
+            box-shadow: 0 0 20px rgba(144, 165, 229, 0.3);
+        }
+
+        .venn-highlight-difference .venn-a {
+            opacity: 0.7;
+            background: rgba(255, 69, 69, 0.6);
+            box-shadow: 0 0 20px rgba(255, 69, 69, 0.3);
+        }
+        .venn-highlight-difference .venn-b {
+            opacity: 0.15;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(144, 165, 229, 0.2) 5px,
+                rgba(144, 165, 229, 0.2) 10px
+            );
+        }
+        .venn-highlight-difference::after {
+            content: "✕";
+            position: absolute;
+            font-size: 40px;
+            color: rgba(144, 165, 229, 0.5);
+            top: 40px;
+            left: 185px;
+            z-index: 3;
         }
 
         .operations-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 16px;
+            flex: 1;
         }
 
         .operation-card {
             background: var(--inteli-gray-light);
             border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid var(--inteli-coral);
+            padding: 20px 22px;
+            border-left: 5px solid var(--inteli-coral);
         }
 
         .operation-card h3 {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--inteli-purple);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .operation-card p {
-            font-size: 14px;
+            font-size: 17px;
             color: #555b66;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
 
         .operation-card .example {
-            font-size: 13px;
+            font-size: 15px;
             color: var(--inteli-coral);
             font-weight: 600;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 8px;
+            padding-top: 8px;
             border-top: 1px solid var(--inteli-gray-medium);
         }
 
@@ -1075,56 +1152,57 @@
         .assertion-question {
             background: var(--inteli-gray-light);
             border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
+            padding: 18px 22px;
+            margin-bottom: 12px;
         }
 
         .assertion-question h4 {
             font-size: 18px;
             font-weight: 700;
             color: var(--inteli-purple);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .assertion {
             background: var(--inteli-white);
             border-left: 4px solid var(--inteli-coral);
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
             border-radius: 8px;
         }
 
         .assertion p {
-            font-size: 15px;
+            font-size: 16px;
             color: var(--inteli-purple);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .assertion-connector {
             text-align: center;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--inteli-coral);
-            margin: 10px 0;
-            font-size: 16px;
+            margin: 6px 0;
+            font-size: 18px;
+            letter-spacing: 2px;
         }
 
         .assertion-alternatives {
             background: var(--inteli-gray-light);
             border-radius: 12px;
-            padding: 20px;
+            padding: 16px 20px;
         }
 
         .assertion-alternatives h4 {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
             color: var(--inteli-purple);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .alternative {
             background: var(--inteli-white);
-            padding: 12px 15px;
-            margin-bottom: 10px;
+            padding: 10px 15px;
+            margin-bottom: 6px;
             border-radius: 8px;
             border: 2px solid transparent;
             cursor: pointer;
@@ -1146,35 +1224,118 @@
         }
 
         .alternative p {
-            font-size: 14px;
+            font-size: 15px;
             color: var(--inteli-purple);
             margin: 0;
         }
+
+        /* Two-column layout for assertion slides */
+        .assertion-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .assertion-layout .assertion-question {
+            margin-bottom: 0;
+        }
+
+        .assertion-layout .assertion-alternatives {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Compact layout for completion slides */
+        .completion-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .completion-propositions {
+            background: var(--inteli-gray-light);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .completion-propositions h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--inteli-purple);
+            margin-bottom: 4px;
+        }
+
+        .completion-analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .analysis-card {
+            background: var(--inteli-gray-light);
+            border-radius: 10px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--inteli-lilac);
+        }
+
+        .analysis-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--inteli-purple);
+            margin-bottom: 6px;
+        }
+
+        .analysis-card p {
+            font-size: 14px;
+            color: #555b66;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+
+        .analysis-card .verdict {
+            font-weight: 700;
+            padding-top: 6px;
+            border-top: 1px solid var(--inteli-gray-medium);
+            margin-top: 4px;
+        }
+
+        .analysis-card .verdict.true { color: var(--inteli-dark-green); }
+        .analysis-card .verdict.false { color: var(--inteli-coral); }
 
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+            flex: 1;
         }
 
         .summary-card {
             background: var(--inteli-gray-light);
             border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid var(--inteli-coral);
+            padding: 28px;
+            border-left: 5px solid var(--inteli-coral);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .summary-card h3 {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 800;
             color: var(--inteli-purple);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .summary-card p {
-            font-size: 14px;
+            font-size: 18px;
             color: #555b66;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         @media print {
@@ -1450,40 +1611,39 @@
                 <h2 class="slide-title">Representação de Conjuntos</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
-                <div class="venn-diagram">
-                    <div class="venn-container">
-                        <div class="venn-circle venn-a"></div>
-                        <div class="venn-circle venn-b"></div>
-                        <div class="venn-label venn-label-a">A</div>
-                        <div class="venn-label venn-label-b">B</div>
-                        <div class="venn-label venn-label-intersection">A ∩ B</div>
+            <div class="slide-body" style="display:grid; grid-template-columns: 280px 1fr; gap: 24px;">
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="venn-diagram venn-compact" style="margin:0;">
+                        <div class="venn-container">
+                            <div class="venn-circle venn-a"></div>
+                            <div class="venn-circle venn-b"></div>
+                            <div class="venn-label" style="top:30px;left:30px;font-size:20px;">A</div>
+                            <div class="venn-label" style="top:30px;right:10px;font-size:20px;">B</div>
+                            <div class="venn-label" style="top:55px;left:95px;font-size:16px;">A ∩ B</div>
+                        </div>
                     </div>
+                    <p style="text-align:center; font-size:14px; color:var(--inteli-gray-dark); margin-top:10px;">Diagrama de Venn</p>
                 </div>
-                <div class="operations-grid">
+                <div class="operations-grid" style="gap:14px;">
                     <div class="operation-card">
-                        <h3>Notação de Pertinência</h3>
-                        <p><strong>∈</strong> = pertence</p>
-                        <p><strong>∉</strong> = não pertence</p>
+                        <h3>Pertinência</h3>
+                        <p><strong style="font-size:24px;">∈</strong> pertence &nbsp; <strong style="font-size:24px;">∉</strong> não pertence</p>
                         <div class="example">Java ∈ A, Rust ∉ A</div>
                     </div>
                     <div class="operation-card">
-                        <h3>Notação de Subconjunto</h3>
-                        <p><strong>⊆</strong> = subconjunto</p>
-                        <p><strong>⊄</strong> = não é subconjunto</p>
+                        <h3>Subconjunto</h3>
+                        <p><strong style="font-size:24px;">⊆</strong> contido &nbsp; <strong style="font-size:24px;">⊄</strong> não contido</p>
                         <div class="example">{Java} ⊆ A</div>
                     </div>
                     <div class="operation-card">
                         <h3>Conjunto Vazio</h3>
-                        <p><strong>∅</strong> ou <strong>{ }</strong></p>
-                        <p>Conjunto sem elementos</p>
+                        <p><strong style="font-size:24px;">∅</strong> ou <strong>{ }</strong> = sem elementos</p>
                         <div class="example">Linguagens inúteis = ∅</div>
                     </div>
                     <div class="operation-card">
                         <h3>Cardinalidade</h3>
-                        <p><strong>|A|</strong> = número de elementos</p>
-                        <p>A = {Python, Java, C++}, |A| = 3</p>
-                        <div class="example">|∅| = 0</div>
+                        <p><strong style="font-size:24px;">|A|</strong> = total de elementos</p>
+                        <div class="example">A = {Python, Java, C++} → |A| = 3</div>
                     </div>
                 </div>
             </div>
@@ -1870,10 +2030,13 @@
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
             <div class="slide-body">
-                <div class="venn-diagram" style="height: 180px;">
+                <div class="venn-diagram venn-compact venn-highlight-intersection">
                     <div class="venn-container">
                         <div class="venn-circle venn-a"></div>
                         <div class="venn-circle venn-b"></div>
+                        <div class="venn-label" style="top:30px;left:20px;font-size:16px;color:var(--inteli-gray-dark);">Customers</div>
+                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-gray-dark);">Orders</div>
+                        <div class="venn-label" style="top:55px;left:88px;font-size:14px;color:var(--inteli-dark-green);font-weight:800;">RESULTADO</div>
                     </div>
                 </div>
                 <div class="code-example">
@@ -1903,10 +2066,13 @@
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
             <div class="slide-body">
-                <div class="venn-diagram" style="height: 180px;">
+                <div class="venn-diagram venn-compact venn-highlight-left">
                     <div class="venn-container">
                         <div class="venn-circle venn-a"></div>
                         <div class="venn-circle venn-b"></div>
+                        <div class="venn-label" style="top:30px;left:20px;font-size:16px;color:var(--inteli-white);font-weight:800;">TODOS</div>
+                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-gray-dark);">Orders</div>
+                        <div class="venn-label" style="top:80px;left:20px;font-size:13px;color:var(--inteli-coral);">+ match se houver</div>
                     </div>
                 </div>
                 <div class="code-example">
@@ -1936,10 +2102,13 @@
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
             <div class="slide-body">
-                <div class="venn-diagram" style="height: 180px;">
+                <div class="venn-diagram venn-compact venn-highlight-union">
                     <div class="venn-container">
                         <div class="venn-circle venn-a"></div>
                         <div class="venn-circle venn-b"></div>
+                        <div class="venn-label" style="top:30px;left:20px;font-size:16px;color:var(--inteli-white);font-weight:800;">TODOS</div>
+                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-white);font-weight:800;">TODOS</div>
+                        <div class="venn-label" style="top:90px;left:70px;font-size:13px;color:var(--inteli-purple);">Tudo de ambas as tabelas</div>
                     </div>
                 </div>
                 <div class="code-example">
@@ -1969,10 +2138,12 @@
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
             <div class="slide-body">
-                <div class="venn-diagram" style="height: 180px;">
+                <div class="venn-diagram venn-compact venn-highlight-difference">
                     <div class="venn-container">
                         <div class="venn-circle venn-a"></div>
                         <div class="venn-circle venn-b"></div>
+                        <div class="venn-label" style="top:25px;left:15px;font-size:16px;color:var(--inteli-white);font-weight:800;">SÓ A</div>
+                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-gray-dark);text-decoration:line-through;">B excluído</div>
                     </div>
                 </div>
                 <div class="code-example">
@@ -2052,33 +2223,33 @@
                 <h2 class="slide-title">Asserção-Razão - Exemplo</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
+            <div class="slide-body assertion-layout">
                 <div class="assertion-question">
-                    <h4>Enunciado da Questão</h4>
+                    <h4>Enunciado</h4>
                     <div class="assertion">
-                        <p><strong>Asserção I:</strong> A operação INNER JOIN retorna apenas registros presentes em ambas as tabelas, representando a interseção de conjuntos.</p>
+                        <p><strong>I.</strong> A operação INNER JOIN retorna apenas registros presentes em ambas as tabelas, representando a interseção de conjuntos.</p>
                     </div>
                     <div class="assertion-connector">PORQUE</div>
                     <div class="assertion">
-                        <p><strong>Asserção II:</strong> O INNER JOIN implementa o conceito matemático de interseção (∩) ao combinar dados de duas tabelas baseado em uma condição de igualdade.</p>
+                        <p><strong>II.</strong> O INNER JOIN implementa o conceito matemático de interseção (∩) ao combinar dados de duas tabelas baseado em uma condição de igualdade.</p>
                     </div>
                 </div>
                 <div class="assertion-alternatives">
                     <h4>Avalie as alternativas:</h4>
                     <div class="alternative" onclick="checkAnswer(this, 'assertion1')" data-correct="true">
-                        <p><strong>A)</strong> Ambas verdadeiras, II justifica I</p>
+                        <p><strong>A)</strong> As asserções I e II são verdadeiras, e a II é justificativa correta da I.</p>
                     </div>
                     <div class="alternative" onclick="checkAnswer(this, 'assertion1')" data-correct="false">
-                        <p><strong>B)</strong> Ambas verdadeiras, II NÃO justifica I</p>
+                        <p><strong>B)</strong> As asserções I e II são verdadeiras, mas a II não é justificativa correta da I.</p>
                     </div>
                     <div class="alternative" onclick="checkAnswer(this, 'assertion1')" data-correct="false">
-                        <p><strong>C)</strong> I verdadeira, II falsa</p>
+                        <p><strong>C)</strong> A asserção I é verdadeira, e a II é falsa.</p>
                     </div>
                     <div class="alternative" onclick="checkAnswer(this, 'assertion1')" data-correct="false">
-                        <p><strong>D)</strong> I falsa, II verdadeira</p>
+                        <p><strong>D)</strong> A asserção I é falsa, e a II é verdadeira.</p>
                     </div>
                     <div class="alternative" onclick="checkAnswer(this, 'assertion1')" data-correct="false">
-                        <p><strong>E)</strong> Ambas falsas</p>
+                        <p><strong>E)</strong> As asserções I e II são falsas.</p>
                     </div>
                     <div class="quiz-feedback" id="feedback-assertion1"></div>
                 </div>
@@ -2362,50 +2533,47 @@
                 <h2 class="slide-title">Complementação Múltipla - Exemplo</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
-                <div class="assertion-question">
+            <div class="slide-body completion-layout">
+                <div class="completion-propositions">
                     <h4>Sobre Operações de Conjuntos e Dados</h4>
-                    <div class="assertion" style="margin: 10px 0;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>I.</strong> A união de dois conjuntos sempre contém mais elementos que ambos separadamente.</p>
                     </div>
-                    <div class="assertion" style="margin: 10px 0;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>II.</strong> A interseção de dois conjuntos contém APENAS os elementos comuns a ambos.</p>
                     </div>
-                    <div class="assertion" style="margin: 10px 0;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>III.</strong> O complemento de um conjunto A depende da definição do conjunto universo U.</p>
                     </div>
-                    <div class="assertion" style="margin: 10px 0;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>IV.</strong> A diferença A − B sempre contém pelo menos um elemento se A ≠ B.</p>
                     </div>
-                </div>
-                <div class="operations-grid" style="margin-top: 20px;">
-                    <div class="operation-card">
-                        <h3>Analisando I</h3>
-                        <p>Se A = {1,2,3} e B = {2,3,4}</p>
-                        <p>A ∪ B = {1,2,3,4} (4 elementos)</p>
-                        <div class="example">✗ FALSO - pode ter mesmo tamanho</div>
-                    </div>
-                    <div class="operation-card">
-                        <h3>Analisando II</h3>
-                        <p>A ∩ B são apenas comum</p>
-                        <p>Sem repetições de única origem</p>
-                        <div class="example">✓ VERDADEIRO</div>
-                    </div>
-                    <div class="operation-card">
-                        <h3>Analisando III</h3>
-                        <p>Aᶜ só faz sentido COM universo U definido</p>
-                        <p>Complemento é relativo</p>
-                        <div class="example">✓ VERDADEIRO</div>
-                    </div>
-                    <div class="operation-card">
-                        <h3>Analisando IV</h3>
-                        <p>Se A = {1,2,3}, B = {1,2,3}</p>
-                        <p>A − B = ∅ (vazio)</p>
-                        <div class="example">✗ FALSO - pode estar vazio</div>
+                    <div style="background: var(--inteli-green); border-radius: 8px; padding: 12px; color: var(--inteli-dark-green); margin-top: 4px;">
+                        <p style="font-weight: 700; font-size:16px; margin:0;">Resposta: II e III são verdadeiras</p>
                     </div>
                 </div>
-                <div style="background: var(--inteli-green); border-radius: 12px; padding: 15px; margin-top: 20px; color: var(--inteli-dark-green);">
-                    <p style="font-weight: 700;">✓ RESPOSTA: II e III são verdadeiras</p>
+                <div class="completion-analysis">
+                    <div class="analysis-card">
+                        <h4>Proposição I</h4>
+                        <p>Se A={1,2,3}, B={2,3,4} → A∪B={1,2,3,4}</p>
+                        <p>Mas se B⊆A, |A∪B|=|A|</p>
+                        <p class="verdict false">✗ FALSA</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h4>Proposição II</h4>
+                        <p>A∩B retorna apenas elementos presentes em ambos os conjuntos</p>
+                        <p class="verdict true">✓ VERDADEIRA</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h4>Proposição III</h4>
+                        <p>Aᶜ só faz sentido com U definido. Complemento é relativo ao universo</p>
+                        <p class="verdict true">✓ VERDADEIRA</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h4>Proposição IV</h4>
+                        <p>Se A={1,2,3}, B={1,2,3} → A−B=∅</p>
+                        <p class="verdict false">✗ FALSA</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2443,33 +2611,35 @@
                 <h2 class="slide-title">Complementação Múltipla - Seu Turno</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body activity-instructions">
-                <div class="timer-container">
+            <div class="slide-body" style="display:grid; grid-template-columns:200px 1fr; gap:20px;">
+                <div class="timer-container" style="padding:20px;">
                     <div class="timer" id="timer-ex3">
-                        <span class="timer-value">07:00</span>
+                        <span class="timer-value" style="font-size:48px;">07:00</span>
                         <span class="timer-label">minutos</span>
                     </div>
-                    <button class="timer-btn" onclick="startTimer('timer-ex3', 420)">Iniciar</button>
-                    <button class="print-btn" onclick="printQuestion('q-student-3')" title="Imprimir">
+                    <button class="timer-btn" style="font-size:14px; padding:10px 20px;" onclick="startTimer('timer-ex3', 420)">Iniciar</button>
+                    <button class="print-btn" onclick="printQuestion('q-student-3')" title="Imprimir" style="margin-top:10px;">
                         <span class="material-icons-outlined">print</span>
                     </button>
                 </div>
-                <div class="activity-steps" id="q-student-3">
-                    <h3>Sobre Bancos de Dados e Conjuntos</h3>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
-                        <p><strong>I.</strong> INNER JOIN implementa a interseção de conjuntos, retornando apenas registros com chave correspondente em ambas tabelas.</p>
+                <div id="q-student-3" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <div class="completion-propositions" style="padding:16px;">
+                        <h4 style="font-size:16px;">Sobre Bancos de Dados e Conjuntos</h4>
+                        <div class="assertion" style="margin:0; padding:10px 14px;">
+                            <p style="font-size:14px;"><strong>I.</strong> INNER JOIN implementa a interseção de conjuntos, retornando apenas registros com chave correspondente em ambas tabelas.</p>
+                        </div>
+                        <div class="assertion" style="margin:0; padding:10px 14px;">
+                            <p style="font-size:14px;"><strong>II.</strong> LEFT JOIN retorna todos da tabela esquerda E os correspondentes da direita.</p>
+                        </div>
+                        <div class="assertion" style="margin:0; padding:10px 14px;">
+                            <p style="font-size:14px;"><strong>III.</strong> FULL OUTER JOIN equivale a (A−B) ∪ (A∩B) ∪ (B−A), ou seja, A ∪ B.</p>
+                        </div>
+                        <div class="assertion" style="margin:0; padding:10px 14px;">
+                            <p style="font-size:14px;"><strong>IV.</strong> EXCEPT implementa a diferença simétrica, incluindo elementos em A ou B mas não em ambos.</p>
+                        </div>
                     </div>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
-                        <p><strong>II.</strong> LEFT JOIN retorna todos os registros da tabela esquerda E os correspondentes da direita, implementando parcialmente a união.</p>
-                    </div>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
-                        <p><strong>III.</strong> FULL OUTER JOIN é equivalente a (A − B) ∪ (A ∩ B) ∪ (B − A), ou simplesmente A ∪ B.</p>
-                    </div>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
-                        <p><strong>IV.</strong> EXCEPT é um operador que implementa a diferença simétrica, incluindo elementos em A ou B mas não em ambos.</p>
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <p style="font-weight: 600; color: var(--inteli-purple); margin-bottom: 10px;">Qual combinação está CORRETA?</p>
+                    <div style="display:flex; flex-direction:column; justify-content:center; gap:8px;">
+                        <p style="font-weight:700; color:var(--inteli-purple); font-size:16px; margin-bottom:4px;">Qual combinação está CORRETA?</p>
                         <div class="alternative" onclick="checkAnswer(this, 'student3')" data-correct="true">
                             <p><strong>A)</strong> Apenas I, II e III</p>
                         </div>
@@ -2485,8 +2655,8 @@
                         <div class="alternative" onclick="checkAnswer(this, 'student3')" data-correct="false">
                             <p><strong>E)</strong> I, II, III e IV</p>
                         </div>
+                        <div class="quiz-feedback" id="feedback-student3"></div>
                     </div>
-                    <div class="quiz-feedback" id="feedback-student3"></div>
                 </div>
             </div>
         </section>
@@ -2497,38 +2667,45 @@
                 <h2 class="slide-title">Complementação Múltipla - Segunda Prática</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
-                <div class="assertion-question">
+            <div class="slide-body completion-layout">
+                <div class="completion-propositions">
                     <h4>Sobre Propriedades de Conjuntos</h4>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>I.</strong> Se |A ∪ B| = |A| + |B|, então A e B são disjuntos (sem elementos comuns).</p>
                     </div>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>II.</strong> O complemento de um conjunto é único e bem definido independentemente do universo.</p>
                     </div>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>III.</strong> De Morgan: (A ∪ B)ᶜ = Aᶜ ∩ Bᶜ é uma propriedade fundamental de conjuntos.</p>
                     </div>
-                    <div class="assertion" style="margin: 10px 0; font-size: 14px;">
+                    <div class="assertion" style="margin:0;">
                         <p><strong>IV.</strong> A cardinalidade de A ∩ B nunca pode ser maior que a cardinalidade de A ∪ B.</p>
                     </div>
+                    <div style="background: var(--inteli-green); border-radius: 8px; padding: 12px; color: var(--inteli-dark-green); margin-top: 4px;">
+                        <p style="font-weight: 700; font-size:16px; margin:0;">Resposta: I, III e IV são verdadeiras</p>
+                    </div>
                 </div>
-                <div class="operations-grid" style="margin-top: 20px;">
-                    <div class="operation-card" style="font-size: 13px;">
-                        <h3>Analise I</h3>
-                        <p>Se não há overlap, soma sim funciona ✓ VERDADEIRO</p>
+                <div class="completion-analysis">
+                    <div class="analysis-card">
+                        <h4>Proposição I</h4>
+                        <p>Se não há overlap, a soma funciona. Disjuntos = sem ∩</p>
+                        <p class="verdict true">✓ VERDADEIRA</p>
                     </div>
-                    <div class="operation-card" style="font-size: 13px;">
-                        <h3>Analise II</h3>
-                        <p>Complemento DEPENDE de U definido ✗ FALSO</p>
+                    <div class="analysis-card">
+                        <h4>Proposição II</h4>
+                        <p>Complemento DEPENDE de U definido. Sem U, não existe Aᶜ</p>
+                        <p class="verdict false">✗ FALSA</p>
                     </div>
-                    <div class="operation-card" style="font-size: 13px;">
-                        <h3>Analise III</h3>
-                        <p>De Morgan é regra fundamental ✓ VERDADEIRO</p>
+                    <div class="analysis-card">
+                        <h4>Proposição III</h4>
+                        <p>Lei de De Morgan é propriedade fundamental da álgebra de conjuntos</p>
+                        <p class="verdict true">✓ VERDADEIRA</p>
                     </div>
-                    <div class="operation-card" style="font-size: 13px;">
-                        <h3>Analise IV</h3>
-                        <p>|A∩B| ≤ |A∪B| sempre ✓ VERDADEIRO</p>
+                    <div class="analysis-card">
+                        <h4>Proposição IV</h4>
+                        <p>A∩B ⊆ A∪B sempre. Logo |A∩B| ≤ |A∪B|</p>
+                        <p class="verdict true">✓ VERDADEIRA</p>
                     </div>
                 </div>
             </div>
