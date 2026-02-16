@@ -704,60 +704,138 @@
         }
 
         /* Venn highlighting for different JOIN types */
+        .venn-highlight-intersection .venn-container {
+            position: relative;
+        }
         .venn-highlight-intersection .venn-a,
         .venn-highlight-intersection .venn-b {
             opacity: 0.25;
         }
-        .venn-highlight-intersection::after {
+        .venn-highlight-intersection .venn-container::after {
             content: "";
             position: absolute;
-            width: 80px;
-            height: 120px;
+            width: 50px;
+            height: 90px;
             background: rgba(137, 206, 165, 0.7);
             border-radius: 50%;
-            top: 20px;
-            left: 120px;
+            top: 10px;
+            left: 105px;
             z-index: 2;
         }
 
         .venn-highlight-left .venn-a {
-            opacity: 0.7;
-            background: rgba(255, 69, 69, 0.6);
-            box-shadow: 0 0 20px rgba(255, 69, 69, 0.3);
+            opacity: 0.8;
+            background: rgba(255, 69, 69, 0.55);
+            box-shadow: 0 0 25px rgba(255, 69, 69, 0.4);
         }
         .venn-highlight-left .venn-b {
-            opacity: 0.2;
+            opacity: 0.15;
         }
 
-        .venn-highlight-union .venn-a,
+        .venn-highlight-union .venn-a {
+            opacity: 0.7;
+            background: rgba(255, 69, 69, 0.5);
+            box-shadow: 0 0 20px rgba(255, 69, 69, 0.3);
+        }
         .venn-highlight-union .venn-b {
             opacity: 0.7;
+            background: rgba(144, 165, 229, 0.5);
             box-shadow: 0 0 20px rgba(144, 165, 229, 0.3);
         }
 
         .venn-highlight-difference .venn-a {
-            opacity: 0.7;
-            background: rgba(255, 69, 69, 0.6);
-            box-shadow: 0 0 20px rgba(255, 69, 69, 0.3);
+            opacity: 0.8;
+            background: rgba(255, 69, 69, 0.55);
+            box-shadow: 0 0 25px rgba(255, 69, 69, 0.4);
         }
         .venn-highlight-difference .venn-b {
-            opacity: 0.15;
+            opacity: 0.12;
             background: repeating-linear-gradient(
                 45deg,
                 transparent,
-                transparent 5px,
-                rgba(144, 165, 229, 0.2) 5px,
-                rgba(144, 165, 229, 0.2) 10px
+                transparent 4px,
+                rgba(144, 165, 229, 0.15) 4px,
+                rgba(144, 165, 229, 0.15) 8px
             );
+            border-style: dashed;
         }
-        .venn-highlight-difference::after {
-            content: "✕";
-            position: absolute;
-            font-size: 40px;
-            color: rgba(144, 165, 229, 0.5);
-            top: 40px;
-            left: 185px;
-            z-index: 3;
+
+        /* SQL Connection Slide Styles */
+        .sql-mapping-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            flex: 1;
+            align-items: start;
+        }
+
+        .sql-col-header {
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .sql-col-header.math {
+            background: var(--inteli-coral);
+            color: white;
+        }
+
+        .sql-col-header.sql {
+            background: var(--inteli-lilac);
+            color: var(--inteli-purple);
+        }
+
+        .sql-mapping-card {
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            transition: transform 0.2s;
+        }
+
+        .sql-mapping-card:hover {
+            transform: scale(1.02);
+        }
+
+        .sql-mapping-card.math-card {
+            background: rgba(255, 69, 69, 0.08);
+            border-left: 4px solid var(--inteli-coral);
+        }
+
+        .sql-mapping-card.sql-card {
+            background: rgba(144, 165, 229, 0.12);
+            border-left: 4px solid var(--inteli-lilac);
+        }
+
+        .sql-mapping-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--inteli-purple);
+            margin-bottom: 4px;
+        }
+
+        .sql-mapping-card p {
+            font-size: 14px;
+            color: #555b66;
+        }
+
+        .sql-arrow-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            padding-top: 52px;
+        }
+
+        .sql-arrow {
+            font-size: 28px;
+            color: var(--inteli-purple);
+            opacity: 0.4;
         }
 
         .operations-grid {
@@ -1985,39 +2063,49 @@
                 <h2 class="slide-title">Conjuntos e SQL: A Conexão</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body two-columns">
-                <div class="column">
-                    <div class="context-card">
+            <div class="slide-body sql-mapping-grid">
+                <div>
+                    <div class="sql-col-header math">Operação de Conjuntos</div>
+                    <div class="sql-mapping-card math-card">
                         <h3>∪ União</h3>
-                        <p>Combina dois conjuntos</p>
-                        <div class="example">SQL: UNION</div>
+                        <p>Combina TODOS os elementos de A e B</p>
                     </div>
-                    <div class="context-card">
+                    <div class="sql-mapping-card math-card">
                         <h3>∩ Interseção</h3>
-                        <p>Elementos em comum</p>
-                        <div class="example">SQL: INNER JOIN</div>
+                        <p>Apenas elementos COMUNS a A e B</p>
                     </div>
-                    <div class="context-card">
-                        <h3>− Diferença</h3>
-                        <p>Em A mas não em B</p>
-                        <div class="example">SQL: LEFT JOIN com NULL</div>
+                    <div class="sql-mapping-card math-card">
+                        <h3>A − B Diferença</h3>
+                        <p>Elementos em A que NÃO estão em B</p>
+                    </div>
+                    <div class="sql-mapping-card math-card">
+                        <h3>A ∪ B Completa</h3>
+                        <p>Tudo de A e tudo de B (sem repetir)</p>
                     </div>
                 </div>
-                <div class="column">
-                    <div class="context-card highlight">
-                        <h3>LEFT JOIN</h3>
-                        <p>Todos de A + comuns com B</p>
-                        <div class="example">A ∪ (A ∩ B)</div>
+                <div class="sql-arrow-col">
+                    <span class="sql-arrow">⟷</span>
+                    <span class="sql-arrow">⟷</span>
+                    <span class="sql-arrow">⟷</span>
+                    <span class="sql-arrow">⟷</span>
+                </div>
+                <div>
+                    <div class="sql-col-header sql">Comando SQL</div>
+                    <div class="sql-mapping-card sql-card">
+                        <h3>UNION</h3>
+                        <p>Combina resultados de dois SELECTs</p>
                     </div>
-                    <div class="context-card highlight">
+                    <div class="sql-mapping-card sql-card">
+                        <h3>INNER JOIN</h3>
+                        <p>Retorna apenas registros em ambas tabelas</p>
+                    </div>
+                    <div class="sql-mapping-card sql-card">
+                        <h3>EXCEPT / MINUS</h3>
+                        <p>Registros em A que não existem em B</p>
+                    </div>
+                    <div class="sql-mapping-card sql-card">
                         <h3>FULL OUTER JOIN</h3>
-                        <p>Tudo de A e tudo de B</p>
-                        <div class="example">A ∪ B (união completa)</div>
-                    </div>
-                    <div class="context-card highlight">
-                        <h3>EXCEPT/MINUS</h3>
-                        <p>Em A mas não em B</p>
-                        <div class="example">A − B (diferença)</div>
+                        <p>Todos os registros de ambas tabelas</p>
                     </div>
                 </div>
             </div>
@@ -2029,32 +2117,38 @@
                 <h2 class="slide-title">INNER JOIN = Interseção (A ∩ B)</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
-                <div class="venn-diagram venn-compact venn-highlight-intersection">
-                    <div class="venn-container">
-                        <div class="venn-circle venn-a"></div>
-                        <div class="venn-circle venn-b"></div>
-                        <div class="venn-label" style="top:30px;left:20px;font-size:16px;color:var(--inteli-gray-dark);">Customers</div>
-                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-gray-dark);">Orders</div>
-                        <div class="venn-label" style="top:55px;left:88px;font-size:14px;color:var(--inteli-dark-green);font-weight:800;">RESULTADO</div>
+            <div class="slide-body" style="display:grid; grid-template-columns: 260px 1fr; gap:24px;">
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="venn-diagram venn-compact venn-highlight-intersection" style="margin:0;">
+                        <div class="venn-container">
+                            <div class="venn-circle venn-a"></div>
+                            <div class="venn-circle venn-b"></div>
+                            <div class="venn-label" style="top:25px;left:15px;font-size:14px;color:var(--inteli-gray-dark);">Customers</div>
+                            <div class="venn-label" style="top:25px;right:-5px;font-size:14px;color:var(--inteli-gray-dark);">Orders</div>
+                        </div>
+                    </div>
+                    <div style="text-align:center; margin-top:12px; padding:10px 16px; background:rgba(137,206,165,0.15); border-radius:8px;">
+                        <p style="font-size:15px; font-weight:700; color:var(--inteli-dark-green);">Retorna: A ∩ B</p>
+                        <p style="font-size:13px; color:#555b66;">Apenas registros em AMBAS</p>
                     </div>
                 </div>
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-lang">SQL</span>
-                        <span class="code-file">intersection.sql</span>
-                    </div>
-                    <pre class="code-block"><code><span class="keyword">SELECT</span> c.id, c.name, o.order_id
+                <div>
+                    <div class="code-example" style="margin-bottom:12px;">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <span class="code-file">intersection.sql</span>
+                        </div>
+                        <pre class="code-block"><code><span class="keyword">SELECT</span> c.id, c.name, o.order_id
 <span class="keyword">FROM</span> customers c
 <span class="keyword">INNER JOIN</span> orders o <span class="keyword">ON</span> c.id = o.customer_id
 
 <span class="comment">-- Retorna APENAS clientes que fizeram pedidos</span>
-<span class="comment">-- Elementos em AMBAS as tabelas</span>
 <span class="comment">-- Interseção: Clientes ∩ Compradores</span></code></pre>
-                </div>
-                <div class="code-connection">
-                    <span class="material-icons-outlined">link</span>
-                    <p><strong>Lógica:</strong> Mostrar apenas registros onde existe correspondência em ambas as tabelas.</p>
+                    </div>
+                    <div class="code-connection">
+                        <span class="material-icons-outlined">link</span>
+                        <p><strong>Lógica:</strong> Registros com correspondência em ambas as tabelas. Clientes sem pedidos são excluídos.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2065,32 +2159,38 @@
                 <h2 class="slide-title">LEFT JOIN = Conjunto A Completo</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
-                <div class="venn-diagram venn-compact venn-highlight-left">
-                    <div class="venn-container">
-                        <div class="venn-circle venn-a"></div>
-                        <div class="venn-circle venn-b"></div>
-                        <div class="venn-label" style="top:30px;left:20px;font-size:16px;color:var(--inteli-white);font-weight:800;">TODOS</div>
-                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-gray-dark);">Orders</div>
-                        <div class="venn-label" style="top:80px;left:20px;font-size:13px;color:var(--inteli-coral);">+ match se houver</div>
+            <div class="slide-body" style="display:grid; grid-template-columns: 260px 1fr; gap:24px;">
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="venn-diagram venn-compact venn-highlight-left" style="margin:0;">
+                        <div class="venn-container">
+                            <div class="venn-circle venn-a"></div>
+                            <div class="venn-circle venn-b"></div>
+                            <div class="venn-label" style="top:25px;left:15px;font-size:14px;color:var(--inteli-white);font-weight:800;">TODOS</div>
+                            <div class="venn-label" style="top:25px;right:-5px;font-size:14px;color:var(--inteli-gray-dark);">Orders</div>
+                        </div>
+                    </div>
+                    <div style="text-align:center; margin-top:12px; padding:10px 16px; background:rgba(255,69,69,0.1); border-radius:8px;">
+                        <p style="font-size:15px; font-weight:700; color:var(--inteli-coral);">Retorna: A completo</p>
+                        <p style="font-size:13px; color:#555b66;">+ match de B se houver</p>
                     </div>
                 </div>
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-lang">SQL</span>
-                        <span class="code-file">left_join.sql</span>
-                    </div>
-                    <pre class="code-block"><code><span class="keyword">SELECT</span> c.id, c.name, o.order_id
+                <div>
+                    <div class="code-example" style="margin-bottom:12px;">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <span class="code-file">left_join.sql</span>
+                        </div>
+                        <pre class="code-block"><code><span class="keyword">SELECT</span> c.id, c.name, o.order_id
 <span class="keyword">FROM</span> customers c
 <span class="keyword">LEFT JOIN</span> orders o <span class="keyword">ON</span> c.id = o.customer_id
 
 <span class="comment">-- Retorna TODOS os clientes (A)</span>
-<span class="comment">-- Mesmo que não tenham feito pedidos</span>
-<span class="comment">-- order_id será NULL se sem pedidos</span></code></pre>
-                </div>
-                <div class="code-connection">
-                    <span class="material-icons-outlined">link</span>
-                    <p><strong>Lógica:</strong> Preservar todos da tabela esquerda, mesmo sem match.</p>
+<span class="comment">-- order_id = NULL se sem pedidos</span></code></pre>
+                    </div>
+                    <div class="code-connection">
+                        <span class="material-icons-outlined">link</span>
+                        <p><strong>Lógica:</strong> Preservar todos da tabela esquerda. Sem match → campos da direita ficam NULL.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2101,32 +2201,38 @@
                 <h2 class="slide-title">FULL OUTER JOIN = União (A ∪ B)</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
-                <div class="venn-diagram venn-compact venn-highlight-union">
-                    <div class="venn-container">
-                        <div class="venn-circle venn-a"></div>
-                        <div class="venn-circle venn-b"></div>
-                        <div class="venn-label" style="top:30px;left:20px;font-size:16px;color:var(--inteli-white);font-weight:800;">TODOS</div>
-                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-white);font-weight:800;">TODOS</div>
-                        <div class="venn-label" style="top:90px;left:70px;font-size:13px;color:var(--inteli-purple);">Tudo de ambas as tabelas</div>
+            <div class="slide-body" style="display:grid; grid-template-columns: 260px 1fr; gap:24px;">
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="venn-diagram venn-compact venn-highlight-union" style="margin:0;">
+                        <div class="venn-container">
+                            <div class="venn-circle venn-a"></div>
+                            <div class="venn-circle venn-b"></div>
+                            <div class="venn-label" style="top:25px;left:15px;font-size:14px;color:var(--inteli-white);font-weight:800;">TODOS</div>
+                            <div class="venn-label" style="top:25px;right:-5px;font-size:14px;color:var(--inteli-white);font-weight:800;">TODOS</div>
+                        </div>
+                    </div>
+                    <div style="text-align:center; margin-top:12px; padding:10px 16px; background:rgba(144,165,229,0.15); border-radius:8px;">
+                        <p style="font-size:15px; font-weight:700; color:var(--inteli-purple);">Retorna: A ∪ B</p>
+                        <p style="font-size:13px; color:#555b66;">Tudo de ambas as tabelas</p>
                     </div>
                 </div>
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-lang">SQL</span>
-                        <span class="code-file">full_outer_join.sql</span>
-                    </div>
-                    <pre class="code-block"><code><span class="keyword">SELECT</span> c.id, c.name, o.order_id
+                <div>
+                    <div class="code-example" style="margin-bottom:12px;">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <span class="code-file">full_outer_join.sql</span>
+                        </div>
+                        <pre class="code-block"><code><span class="keyword">SELECT</span> c.id, c.name, o.order_id
 <span class="keyword">FROM</span> customers c
 <span class="keyword">FULL OUTER JOIN</span> orders o <span class="keyword">ON</span> c.id = o.customer_id
 
 <span class="comment">-- Retorna TUDO: Clientes + Pedidos</span>
-<span class="comment">-- NULL onde sem correspondência</span>
-<span class="comment">-- União completa: A ∪ B</span></code></pre>
-                </div>
-                <div class="code-connection">
-                    <span class="material-icons-outlined">link</span>
-                    <p><strong>Lógica:</strong> Combinar tudo de ambas as tabelas, preservando não-matches.</p>
+<span class="comment">-- NULL onde sem correspondência</span></code></pre>
+                    </div>
+                    <div class="code-connection">
+                        <span class="material-icons-outlined">link</span>
+                        <p><strong>Lógica:</strong> Combina tudo de ambas as tabelas. Sem match → NULL nos campos da outra.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2137,33 +2243,39 @@
                 <h2 class="slide-title">EXCEPT/MINUS = Diferença (A − B)</h2>
                 <div class="inteli-mini-logo"><img src="logo-inteli-color.png" alt="inteli"></div>
             </div>
-            <div class="slide-body">
-                <div class="venn-diagram venn-compact venn-highlight-difference">
-                    <div class="venn-container">
-                        <div class="venn-circle venn-a"></div>
-                        <div class="venn-circle venn-b"></div>
-                        <div class="venn-label" style="top:25px;left:15px;font-size:16px;color:var(--inteli-white);font-weight:800;">SÓ A</div>
-                        <div class="venn-label" style="top:30px;right:0px;font-size:16px;color:var(--inteli-gray-dark);text-decoration:line-through;">B excluído</div>
+            <div class="slide-body" style="display:grid; grid-template-columns: 260px 1fr; gap:24px;">
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="venn-diagram venn-compact venn-highlight-difference" style="margin:0;">
+                        <div class="venn-container">
+                            <div class="venn-circle venn-a"></div>
+                            <div class="venn-circle venn-b"></div>
+                            <div class="venn-label" style="top:25px;left:15px;font-size:14px;color:var(--inteli-white);font-weight:800;">SÓ A</div>
+                            <div class="venn-label" style="top:25px;right:-5px;font-size:14px;color:var(--inteli-gray-dark);text-decoration:line-through;">excluído</div>
+                        </div>
+                    </div>
+                    <div style="text-align:center; margin-top:12px; padding:10px 16px; background:rgba(255,69,69,0.1); border-radius:8px;">
+                        <p style="font-size:15px; font-weight:700; color:var(--inteli-coral);">Retorna: A − B</p>
+                        <p style="font-size:13px; color:#555b66;">Elementos só em A</p>
                     </div>
                 </div>
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-lang">SQL</span>
-                        <span class="code-file">difference.sql</span>
-                    </div>
-                    <pre class="code-block"><code><span class="keyword">SELECT</span> customer_id <span class="keyword">FROM</span> orders
+                <div>
+                    <div class="code-example" style="margin-bottom:12px;">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <span class="code-file">difference.sql</span>
+                        </div>
+                        <pre class="code-block"><code><span class="keyword">SELECT</span> customer_id <span class="keyword">FROM</span> orders
 <span class="keyword">WHERE</span> order_date <span class="keyword">IN</span> (
     <span class="keyword">SELECT</span> id <span class="keyword">FROM</span> customers
     <span class="keyword">EXCEPT</span>
     <span class="keyword">SELECT</span> customer_id <span class="keyword">FROM</span> returns
 )
-
-<span class="comment">-- Clientes que compraram MAS NÃO devolveram</span>
-<span class="comment">-- Elementos só em A: Clientes − Devolvedores</span></code></pre>
-                </div>
-                <div class="code-connection">
-                    <span class="material-icons-outlined">link</span>
-                    <p><strong>Lógica:</strong> Elementos na primeira query não presentes na segunda.</p>
+<span class="comment">-- Clientes que compraram MAS NÃO devolveram</span></code></pre>
+                    </div>
+                    <div class="code-connection">
+                        <span class="material-icons-outlined">link</span>
+                        <p><strong>Lógica:</strong> Elementos na primeira query que NÃO aparecem na segunda.</p>
+                    </div>
                 </div>
             </div>
         </section>
