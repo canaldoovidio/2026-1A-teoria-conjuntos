@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparação ENADE | Matemática Aplicada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        :root {
+            --inteli-purple: #2e2640;
+            --inteli-coral: #ff4545;
+            --inteli-lilac: #90a5e5;
+            --inteli-green: #89cea5;
+            --inteli-dark-green: #066d73;
+            --inteli-gray-dark: #b2b6bf;
+            --inteli-gray-medium: #caced6;
+            --inteli-gray-light: #e6eaeb;
+            --inteli-white: #ffffff;
+            --font-primary: 'Manrope', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--inteli-gray-light);
+            color: var(--inteli-purple);
+            min-height: 100vh;
+        }
+
+        .course-header {
+            background: var(--inteli-purple);
+            padding: 40px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--inteli-white);
+            margin-bottom: 8px;
+        }
+
+        .header-title h2 {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--inteli-lilac);
+        }
+
+        .header-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .instructor-badge,
+        .class-badge {
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .instructor-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--inteli-white);
+        }
+
+        .class-badge {
+            background: var(--inteli-coral);
+            color: var(--inteli-white);
+        }
+
+        main.container {
+            padding-top: 40px;
+            padding-bottom: 60px;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .lesson-card {
+            background: var(--inteli-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(46, 38, 64, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(46, 38, 64, 0.15);
+        }
+
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(46, 38, 64, 0.03);
+        }
+
+        .week-tag {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--inteli-purple);
+        }
+
+        .date-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--inteli-gray-dark);
+        }
+
+        .lesson-body {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .lesson-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            background: rgba(137, 206, 165, 0.15);
+            color: var(--inteli-dark-green);
+        }
+
+        .lesson-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--inteli-purple);
+            line-height: 1.4;
+        }
+
+        .lesson-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--inteli-gray-light);
+        }
+
+        .lesson-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--inteli-purple);
+            color: var(--inteli-white);
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .lesson-btn:hover {
+            background: var(--inteli-coral);
+        }
+
+        .lesson-btn.disabled {
+            background: var(--inteli-gray-medium);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="course-header">
+        <div class="container header-content">
+            <div class="header-title">
+                <h1>Preparação ENADE</h1>
+                <h2>Matemática Aplicada à Computação</h2>
+            </div>
+            <div class="header-info">
+                <span class="instructor-badge">Inteli</span>
+                <span class="class-badge">2026.1</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="schedule-grid">
+
+            <!-- AULA 01 -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="week-tag">Aula 01</span>
+                    <span class="date-tag">FEV/2026</span>
+                </div>
+                <div class="lesson-body">
+                    <span class="lesson-type">Aula Teórica + Prática</span>
+                    <h3 class="lesson-title">Teoria dos Conjuntos: Fundamento Matemático para Análise de Dados e Tomada de Decisão</h3>
+                </div>
+                <div class="lesson-footer">
+                    <a href="aula01.html" class="lesson-btn">Acessar Aula</a>
+                </div>
+            </div>
+
+            <!-- AULA 02 -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="week-tag">Aula 02</span>
+                    <span class="date-tag">MAR/2026</span>
+                </div>
+                <div class="lesson-body">
+                    <span class="lesson-type">Em Breve</span>
+                    <h3 class="lesson-title">Lógica Proposicional e Álgebra Booleana aplicadas à Engenharia de Software</h3>
+                </div>
+                <div class="lesson-footer">
+                    <button class="lesson-btn disabled">Em Breve</button>
+                </div>
+            </div>
+
+            <!-- AULA 03 -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <span class="week-tag">Aula 03</span>
+                    <span class="date-tag">MAR/2026</span>
+                </div>
+                <div class="lesson-body">
+                    <span class="lesson-type">Em Breve</span>
+                    <h3 class="lesson-title">Grafos e Algoritmos: Modelagem de Redes e Otimização de Rotas</h3>
+                </div>
+                <div class="lesson-footer">
+                    <button class="lesson-btn disabled">Em Breve</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+
+</html>
